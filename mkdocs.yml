@@ -1,0 +1,64 @@
+site_name: PHIL 2001 course tools
+site_description: The course tools for PHIL 2001 at Northeastern, in one place. Every tool runs in the browser.
+site_url: https://kaiwicke07.github.io/phil2001-site/
+repo_url: https://github.com/kaiwicke07/phil2001-site
+repo_name: phil2001-site
+edit_uri: edit/main/docs/
+copyright: Course tools by Rory Smead and contributors, MIT licence. Contributed work appears with its author’s consent.
+
+theme:
+  name: material
+  language: en
+  font:
+    text: Atkinson Hyperlegible Next
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    logo: material/grid
+    repo: material/github
+  favicon: assets/favicon.svg
+  features:
+    - navigation.tabs
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+
+nav:
+  - Tools: index.md
+  - Contribute: contribute.md
+
+extra_javascript:
+  - assets/a11y.js
+
+extra_css:
+  - assets/site.css
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - tables
+  - smarty
+  - toc:
+      permalink: false
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  generator: false

@@ -1,0 +1,238 @@
+/* PHIL 2001 course tools.
+   Plain white pages, one readable typeface, and the two colours the course tools use for
+   strategy 1 (blue) and strategy 2 (orange). Blue marks things you click; orange marks
+   the "Try this" notes. Every colour and font goes through the tokens below. */
+
+/* Every raw value lives here. */
+:root {
+  --light-bg: #ffffff;
+  --light-surface: #f5f7f9;
+  --light-text: #1f2328;
+  --light-text-soft: #57606a;
+  --light-rule: #d8dee4;
+  --light-blue: #2b6a8e;         /* strategy 1, darkened from the tools' #3B7EA1 for contrast */
+  --light-blue-strong: #1f5272;
+  --light-on-blue: #ffffff;
+  --light-try-bg: #fdf1e7;       /* strategy 2 orange (#E07B39), as a tint */
+  --light-try-ink: #9a4614;
+
+  --dark-bg: #16191e;
+  --dark-surface: #1e2228;
+  --dark-text: #e6e8eb;
+  --dark-text-soft: #a8b0ba;
+  --dark-rule: #30363d;
+  --dark-blue: #7db4d6;
+  --dark-blue-strong: #a6cde6;
+  --dark-on-blue: #0f1a22;
+  --dark-try-bg: #2b211a;
+  --dark-try-ink: #f0a36b;
+
+  --font: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+
+/* Material sets the scheme on <body>; each scheme picks its set of values. */
+[data-md-color-scheme="default"] {
+  --bg: var(--light-bg);
+  --surface: var(--light-surface);
+  --text: var(--light-text);
+  --text-soft: var(--light-text-soft);
+  --rule: var(--light-rule);
+  --blue: var(--light-blue);
+  --blue-strong: var(--light-blue-strong);
+  --on-blue: var(--light-on-blue);
+  --try-bg: var(--light-try-bg);
+  --try-ink: var(--light-try-ink);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 215;
+  --bg: var(--dark-bg);
+  --surface: var(--dark-surface);
+  --text: var(--dark-text);
+  --text-soft: var(--dark-text-soft);
+  --rule: var(--dark-rule);
+  --blue: var(--dark-blue);
+  --blue-strong: var(--dark-blue-strong);
+  --on-blue: var(--dark-on-blue);
+  --try-bg: var(--dark-try-bg);
+  --try-ink: var(--dark-try-ink);
+}
+
+/* Hand the values to Material's own variables, in both schemes. */
+[data-md-color-scheme] {
+  --md-primary-fg-color: var(--bg);
+  --md-primary-fg-color--light: var(--bg);
+  --md-primary-fg-color--dark: var(--bg);
+  --md-primary-bg-color: var(--text);
+  --md-primary-bg-color--light: var(--text-soft);
+  --md-accent-fg-color: var(--blue-strong);
+  --md-default-bg-color: var(--bg);
+  --md-default-fg-color: var(--text);
+  --md-default-fg-color--light: var(--text-soft);
+  --md-typeset-color: var(--text);
+  --md-typeset-a-color: var(--blue);
+  --md-footer-bg-color: var(--surface);
+  --md-footer-bg-color--dark: var(--surface);
+  --md-footer-fg-color: var(--text);
+  --md-footer-fg-color--light: var(--text-soft);
+  --md-footer-fg-color--lighter: var(--text-soft);
+  --md-text-font: var(--font);
+}
+
+html, body { overflow-x: clip; }
+body, input { font-family: var(--font); }
+
+/* Header and tabs: same white as the page, one hairline under them */
+.md-header, .md-tabs { background: var(--bg); color: var(--text); }
+.md-header { box-shadow: none; border-bottom: 1px solid var(--rule); }
+.md-header--shadow { box-shadow: none; }
+.md-tabs { border-bottom: 1px solid var(--rule); }
+.md-tabs__link { font-size: 0.75rem; opacity: 1; color: var(--text-soft); }
+.md-tabs__item--active .md-tabs__link { color: var(--text); font-weight: 700; }
+.md-header__topic { font-weight: 700; }
+.md-search__form { background: var(--surface); border: 1px solid var(--rule); box-shadow: none; }
+.md-search__input { color: var(--text); }
+.md-search__input::placeholder { color: var(--text-soft); }
+.md-search__icon[for="__search"] { color: var(--text-soft); }
+
+/* Type: one family, one scale */
+.md-typeset { font-size: 0.85rem; line-height: 1.6; }
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: var(--font);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+  min-width: 0;
+  text-wrap: balance;
+}
+.md-typeset h1 { font-size: 2.1em; line-height: 1.15; margin: 0 0 0.5em; }
+.md-typeset h2 { font-size: 1.35em; margin: 2.2em 0 0.8em; }
+.md-typeset h3 { font-size: 1.2em; margin: 0 0 0.45em; }
+
+.lede { font-size: 1.1em; color: var(--text-soft); max-width: 36em; }
+
+/* Links in running text are underlined, not only coloured */
+.md-typeset p a:not(.md-button),
+.md-typeset li a:not(.md-button),
+.md-typeset td a:not(.md-button) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* Tool entries: text beside a real screenshot of the tool */
+.md-typeset .tool {
+  display: grid;
+  gap: 1.2rem 2.4rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: 5rem;
+}
+.md-typeset .tool:last-of-type { border-bottom: 1px solid var(--rule); }
+.md-typeset .tool-text > p:first-of-type { margin-top: 0; }
+
+.md-typeset .tool-shot { margin: 0; }
+.md-typeset .tool-shot a { display: block; border-radius: 6px; }
+.md-typeset .tool-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+.md-typeset .tool-shot figcaption {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  text-align: left;
+  margin: 0.4rem 0 0;
+  max-width: none;
+}
+
+@media screen and (min-width: 60em) {
+  .md-typeset .tool { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: start; }
+}
+
+.md-typeset .try {
+  background: var(--try-bg);
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+  margin: 1rem 0 1.1rem;
+}
+.md-typeset .try p { margin: 0; }
+.md-typeset .try strong:first-child { color: var(--try-ink); }
+
+/* Buttons: one filled style for "Open", one outlined style for the rest */
+.md-typeset .md-button {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.5em 1.05em;
+  margin: 0.25rem 0.4rem 0.25rem 0;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--text);
+  background: var(--bg);
+  white-space: nowrap;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, transform 80ms ease;
+}
+.md-typeset .md-button:active { transform: translateY(1px); }
+.md-typeset .md-button:hover { border-color: var(--text-soft); background: var(--surface); color: var(--text); }
+.md-typeset .md-button--primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--on-blue);
+}
+.md-typeset .md-button--primary:hover { background: var(--blue-strong); border-color: var(--blue-strong); color: var(--on-blue); }
+.md-typeset .md-button:focus-visible,
+.md-typeset a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  transition: none;
+}
+
+/* "Which tool" table */
+.md-typeset table:not([class]) {
+  font-size: 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: none;
+}
+.md-typeset table:not([class]) th { background: var(--surface); color: var(--text); font-weight: 700; }
+.md-typeset table:not([class]) td { border-top: 1px solid var(--rule); }
+.md-typeset table:not([class]) tbody tr:hover { background: transparent; box-shadow: none; }
+
+/* More resources: a plain definition-style list */
+.md-typeset .resources ul { list-style: none; margin: 0; padding: 0; }
+.md-typeset .resources li { margin: 0; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+.md-typeset .resources li:first-child { border-top: 1px solid var(--rule); }
+
+/* Footer */
+.md-footer-meta { background: var(--surface); border-top: 1px solid var(--rule); }
+.md-copyright, .md-copyright__highlight { color: var(--text-soft); }
+.md-footer-meta .md-copyright a { color: var(--text); text-decoration: underline; }
+.md-footer-meta .md-social__link svg { fill: var(--text-soft); }
+
+/* Phones: full-width buttons, roomier tap targets */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset h1 { font-size: 1.8em; }
+  .md-typeset .md-button { display: block; text-align: center; margin: 0.45rem 0; padding: 0.75em 1em; white-space: normal; }
+  .md-typeset table:not([class]) { font-size: 0.78rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-typeset .md-button { transition: none; }
+  .md-typeset .md-button:active { transform: none; }
+}
+
+.md-typeset .code-links { font-size: 0.8rem; color: var(--text-soft); margin: 0.6rem 0 0; }
+.md-typeset .code-links a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* Material indents lists with [dir] selectors; the resource list sits flush */
+[dir] .md-typeset .resources ul { margin-left: 0; margin-right: 0; }
+[dir] .md-typeset .resources ul li { margin-left: 0; margin-right: 0; }
